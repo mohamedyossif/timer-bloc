@@ -1,4 +1,4 @@
-# timer_bloc1
+# timer app for beginner using bloc 
 
 A new Flutter project.
 
