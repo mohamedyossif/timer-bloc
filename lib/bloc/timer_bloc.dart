@@ -5,20 +5,22 @@ import 'package:timer_bloc1/bloc/timer_event.dart';
 import 'package:timer_bloc1/bloc/timer_state.dart';
 
 class TimerBloc extends Bloc<TimerEvent,TimerState>
-{
-   final int _duration=60;
+{    
+   final int _duration=120;
     Ticker _ticker=Ticker();
    StreamSubscription _tickerSubScription;
-
-  TimerBloc():super(Ready(60));
- 
+    //initial state
+  TimerBloc():super(Ready(120));
+  // to recive event from user
   @override
   Stream<TimerState> mapEventToState(TimerEvent event) async*{
    if(event is Start)
    {
      Start start =event;
      yield Running(start.duration);
+     //check if there is data,it`ll delete it
      _tickerSubScription?.cancel();
+     // flow data from stream ,then call Tick event to return Runnning state 
      _tickerSubScription=_ticker.tick(ticks: start.duration).listen((duration) { 
        add(Tick(duration: duration));
      });
@@ -50,6 +52,7 @@ class TimerBloc extends Bloc<TimerEvent,TimerState>
       yield tick.duration>0?Running(tick.duration):Finished(0);
     }
   }
+  //delete streams to improve performance app
   @override
   Future<void> close() {
     _tickerSubScription?.cancel();

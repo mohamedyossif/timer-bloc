@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: BlocProvider(
         create: (context) => TimerBloc(),
         child: Home(),
@@ -29,6 +30,7 @@ class Home extends StatelessWidget {
       appBar: AppBar(
         title: Text("Timer App"),
       ),
+      //last in last out with widgets
       body: Stack(
         children: [
           BackGround(),
@@ -56,6 +58,7 @@ class Home extends StatelessWidget {
                   //buildWhen is instead of condition
                   buildWhen: (perviousState, currentState) =>
                       perviousState.runtimeType != currentState.runtimeType,
+                      // actionsButton based on events
                   builder: (context, state) => Action()),
             ],
           ),
@@ -117,6 +120,7 @@ class Action extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: _mapStateToActionButton(
+        //instance of TimerBloc 
           timerBolc: BlocProvider.of<TimerBloc>(context)),
     );
   }

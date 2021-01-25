@@ -1,4 +1,5 @@
-abstract class TimerState 
+//this is class to enable sent any event which inherited from it 
+ class TimerState 
 {
 final int duration;
 const TimerState(this.duration);

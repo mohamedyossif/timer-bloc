@@ -1,8 +1,7 @@
-//import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
-
-abstract class TimerEvent 
+ class TimerEvent 
 {
+  //to made const constructor subclass
   const TimerEvent();
 }
 class Start extends TimerEvent
